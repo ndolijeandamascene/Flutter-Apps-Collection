@@ -14,22 +14,60 @@
 
 import 'package:flutter/material.dart';
 
+import 'model/product.dart';
+import 'model/products_repository.dart';
+import 'supplemental/asymmetric_view.dart';
+
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
-  // TODO: Make a collection of cards (102)
-  // TODO: Add a variable for Category (104)
   @override
   Widget build(BuildContext context) {
     // TODO: Return an AsymmetricView (104)
+    
     // TODO: Pass Category variable to AsymmetricView (104)
-    return const Scaffold(
+    return  Scaffold(
       // TODO: Add app bar (102)
-      // TODO: Add a grid view (102)
-      body: Center(
-        child: Text('You did it!'),
+      appBar: AppBar(
+    // TODO: Add buttons and title (102)
+     leading: IconButton(
+      icon: const Icon(
+        Icons.menu,
+        semanticLabel: 'menu',
       ),
-      resizeToAvoidBottomInset: false,
-    );
-  }
+      onPressed: () {
+        print('Menu button');
+      },
+    ),
+     title: const Text('SHRINE'),
+    // TODO: Add trailing buttons (102)
+    actions: <Widget>[
+  IconButton(
+    icon: const Icon(
+      Icons.search,
+      semanticLabel: 'search',
+    ),
+     onPressed: () {
+      print('Search button');
+    },
+  ),
+  IconButton(
+    icon: const Icon(
+      Icons.tune,
+      semanticLabel: 'filter',
+    ),
+    onPressed: () {
+      print('Filter button');
+    },
+  ),
+],
+  ),
+  
+
+
+   body: AsymmetricView(
+  products: ProductsRepository.loadProducts(Category.all),
+),
+);
+}
 }
